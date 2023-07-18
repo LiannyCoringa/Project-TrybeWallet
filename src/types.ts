@@ -1,3 +1,6 @@
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+
 export type RootState = {
   user: {
     email: '',
@@ -9,3 +12,5 @@ export type RootState = {
     idToEdit: number,
   },
 };
+
+export type Dispatch = ThunkDispatch<RootState, null, AnyAction>;

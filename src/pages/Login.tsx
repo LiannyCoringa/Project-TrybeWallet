@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import action from '../redux/actions';
+import actionEmail from '../redux/actions';
 
 function Login() {
   const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z0-9]+$/i;
@@ -28,7 +28,7 @@ function Login() {
   const dispatch = useDispatch();
   const handleClick = () => {
     navigate('/carteira');
-    dispatch(action(inputEmail));
+    dispatch(actionEmail(inputEmail));
   };
 
   return (
