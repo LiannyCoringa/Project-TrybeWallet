@@ -4,10 +4,12 @@ import Login from './pages/Login';
 import Wallet from './pages/Wallet';
 
 function App() {
-  <Routes>
-    <Route path="/" element={ <Login /> } />
-    <Route path="/carteira" element={ <Wallet /> } />
-  </Routes>;
+  return (
+    <Routes>
+      <Route path="/" element={ <Login /> } />
+      <Route path="/carteira" element={ <Wallet /> } />
+    </Routes>
+  );
 }
 
 export default App;

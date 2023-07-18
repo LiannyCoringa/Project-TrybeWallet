@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import action from '../redux/actions';
 
 function Login() {
-  const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+  const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z0-9]+$/i;
   const [email, setEmail] = useState(false);
   const [inputEmail, setInputEmail] = useState('');
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (emailRegex.test(event.target.value)) {
       setEmail(true);
+    } else {
+      setEmail(false);
     }
     setInputEmail(event.target.value);
   };
@@ -18,6 +20,8 @@ function Login() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length >= 6) {
       setPassword(true);
+    } else {
+      setPassword(false);
     }
   };
   const navigate = useNavigate();
