@@ -45,7 +45,7 @@ function Login() {
         onChange={ (event) => handleChange(event) }
       />
       { email && password
-        ? <button onClick={ handleClick }>Entrar</button>
+        ? <button type="button" onClick={ handleClick }>Entrar</button>
         : <button disabled>Entrar</button> }
 
     </form>
