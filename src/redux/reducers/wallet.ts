@@ -15,7 +15,7 @@ const wallet = (state = INITIAL_STATE, action: AnyAction) => {
       return {
         ...state,
         currencies: action.payload,
-      }
+      };
     default:
       return state;
   }

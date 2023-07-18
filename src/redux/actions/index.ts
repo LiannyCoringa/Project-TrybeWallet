@@ -16,7 +16,7 @@ const requestStarted = () => ({
 const requestSuccess = (data: string[]) => ({
   type: REQUEST_SUCCESS,
   payload: data,
-})
+});
 
 export function fetchCurrencies() {
   return async (dispatch: Dispatch) => {
@@ -30,7 +30,7 @@ export function fetchCurrencies() {
     } catch (error: any) {
       console.log(error);
     }
-  }
+  };
 }
 
 export default actionEmail;

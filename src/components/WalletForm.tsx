@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "../types";
-import { useEffect } from "react";
-import { fetchCurrencies } from "../redux/actions";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { Dispatch, RootState } from '../types';
+import { fetchCurrencies } from '../redux/actions';
 
 function WalletForm() {
   const dispatch: Dispatch = useDispatch();
@@ -9,9 +9,9 @@ function WalletForm() {
   useEffect(() => {
     const fetchAPI = async () => {
       dispatch(fetchCurrencies());
-    }
-    fetchAPI()
-  }, [])
+    };
+    fetchAPI();
+  }, []);
 
   const stateCurrencies = useSelector((state: RootState) => state.wallet.currencies);
   const stateFiltro = stateCurrencies.filter((currencies) => currencies !== 'USDT');
@@ -23,7 +23,7 @@ function WalletForm() {
       <select data-testid="currency-input">
         {(
           stateFiltro.map((currencies) => (
-          <option>{ currencies }</option>
+            <option key={ currencies[0] }>{ currencies }</option>
           ))
         )}
       </select>
@@ -40,7 +40,7 @@ function WalletForm() {
         <option>Saúde</option>
       </select>
     </div>
-  )
+  );
 }
 
 export default WalletForm;
