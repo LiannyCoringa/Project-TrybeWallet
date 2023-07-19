@@ -23,7 +23,6 @@ function WalletForm() {
 
   const stateCurrencies = useSelector((state: RootState) => state.wallet.currencies);
   const stateFiltro = stateCurrencies.filter((currencies) => currencies !== 'USDT');
-  const stateExpenses = useSelector((state: RootState) => state.wallet.expenses);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -34,9 +33,10 @@ function WalletForm() {
   };
 
   const handleClick = () => {
-    dispatch(fetchExpenses(values));
+    const valores = { ...values, id: soma };
+    dispatch(fetchExpenses(valores));
     setSoma(soma + 1);
-    setValues({ ...values, id: soma, value: '', description: '' });
+    setValues({ ...values, value: '', description: '' });
   };
 
   return (
