@@ -14,3 +14,12 @@ export type RootState = {
 };
 
 export type Dispatch = ThunkDispatch<RootState, null, AnyAction>;
+
+export type Despesas = {
+  id: number,
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
+};

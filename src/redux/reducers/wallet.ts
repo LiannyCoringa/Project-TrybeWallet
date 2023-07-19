@@ -1,6 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { AnyAction } from 'redux';
-import { REQUEST_STARTED, REQUEST_SUCCESS } from '../actions';
+import { REQUEST_SUCCESS, REQUEST_SUCCESS_EXPENSES } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -15,6 +15,14 @@ const wallet = (state = INITIAL_STATE, action: AnyAction) => {
       return {
         ...state,
         currencies: action.payload,
+      };
+    case REQUEST_SUCCESS_EXPENSES:
+      return {
+        ...state,
+        expenses: [...state.expenses, {
+          ...action.payload.values,
+          exchangeRates: { ...action.payload.data },
+        }],
       };
     default:
       return state;
