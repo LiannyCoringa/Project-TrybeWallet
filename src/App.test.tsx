@@ -28,3 +28,17 @@ describe('Testa a pagina de login', () => {
     expect(store.getState().user.email).toBe('test@test.com');
   });
 });
+
+describe('Testa o Header do Forms', () => {
+  test('Ao acessar a rota "/carteira", o header renderiza', () => {
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
+
+    const email = screen.getByTestId('email-field');
+    const total = screen.getByTestId('total-field');
+    const moeda = screen.getByTestId('header-currency-field');
+
+    expect(email).toBeInTheDocument();
+    expect(total).toBe(0.00);
+    expect(moeda).toBe('BRL');
+  })
+});
