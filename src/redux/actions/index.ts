@@ -6,6 +6,7 @@ export const REQUEST_STARTED = 'REQUEST_STARTED';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const DESPESAS = 'DESPESAS';
 export const REQUEST_SUCCESS_EXPENSES = 'REQUEST_SUCCESS_EXPENSES';
+export const DELETE_EXPENSES = 'DELETE_EXPENSES';
 
 const actionEmail = (email: string) => ({
   type: USER_EMAIL,
@@ -56,5 +57,10 @@ export function fetchExpenses(values: Despesas) {
     }
   };
 }
+
+export const deleteExpenses = (id: any) => ({
+  type: DELETE_EXPENSES,
+  payload: id,
+});
 
 export default actionEmail;

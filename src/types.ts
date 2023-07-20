@@ -10,6 +10,7 @@ export type RootState = {
     expenses: [],
     editor: boolean,
     idToEdit: number,
+    total: number,
   },
 };
 

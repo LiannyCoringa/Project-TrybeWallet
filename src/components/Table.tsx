@@ -1,13 +1,15 @@
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { RootState } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, WalletState } from '../types';
+import { deleteExpenses } from '../redux/actions';
 
 function Table() {
+  const dispatch = useDispatch();
   const rootStateExpenses = useSelector((state: RootState) => state.wallet.expenses);
 
-  useEffect(() => {
-
-  }, []);
+  const handleClick = (id: any) => {
+    const data = rootStateExpenses.filter((expenses: WalletState) => expenses.id !== id);
+    dispatch(deleteExpenses(data));
+  };
 
   return (
     <table>
@@ -23,8 +25,7 @@ function Table() {
         <th>Editar/Excluir</th>
       </tr>
       <tbody>
-        {
-        rootStateExpenses.map((objeto: any) => (
+        { rootStateExpenses.map((objeto: any) => (
           <tr key={ objeto.id }>
             <td>{ objeto.description }</td>
             <td>{ objeto.tag }</td>
@@ -36,10 +37,18 @@ function Table() {
               { (objeto.exchangeRates[objeto.currency].ask * objeto.value).toFixed(2) }
             </td>
             <td>Real</td>
-            <td>Editar</td>
+            <td>
+              <button
+                id={ objeto.id }
+                type="button"
+                data-testid="delete-btn"
+                onClick={ () => handleClick(objeto.id) }
+              >
+                Excluir
+              </button>
+            </td>
           </tr>
-        ))
-      }
+        ))}
       </tbody>
     </table>
   );
