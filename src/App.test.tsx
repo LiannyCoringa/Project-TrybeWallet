@@ -1,7 +1,13 @@
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import App from './App';
 import { renderWithRouterAndRedux } from './tests/helpers/renderWith';
+import mockData from './tests/helpers/mockData';
+
+global.fetch = vi.fn().mockResolvedValue({
+  json: async () => (mockData),
+});
 
 describe('Testa a pagina de login', () => {
   test('Ao acessar a rota "/", aparece dois inputs e um button', () => {
@@ -29,7 +35,7 @@ describe('Testa a pagina de login', () => {
   });
 });
 
-describe('Testa o Header do Forms', () => {
+describe('Testa a rota "/carteira" do Forms', () => {
   test('Ao acessar a rota "/carteira", o header renderiza', () => {
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
 
@@ -72,5 +78,25 @@ describe('Testa o Header do Forms', () => {
     expect(screen.getByText('Valor convertido')).toBeInTheDocument();
     expect(screen.getByText('Moeda de conversão')).toBeInTheDocument();
     expect(screen.getByText('Editar/Excluir')).toBeInTheDocument();
+  });
+});
+
+describe('Testa os eventos do forms', () => {
+  test('Testa se ao adicionar uma despesa, ela renderiza na tela', async () => {
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
+    const user = userEvent.setup();
+
+    // expect(global.fetch).toHaveBeenCalledTimes(1);
+
+    const inputValue = screen.getByTestId('value-input');
+    const inputDescription = screen.getByTestId('description-input');
+    const buttonAdd = screen.getByRole('button', { name: 'Adicionar despesa' });
+
+    await user.type(inputValue, '12');
+    await user.type(inputDescription, 'doze dolares');
+    await user.click(buttonAdd);
+
+    expect(inputValue).toHaveValue('');
+    expect(screen.getByText('doze dolares')).toBeInTheDocument();
   });
 });
