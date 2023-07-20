@@ -7,6 +7,8 @@ export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const DESPESAS = 'DESPESAS';
 export const REQUEST_SUCCESS_EXPENSES = 'REQUEST_SUCCESS_EXPENSES';
 export const DELETE_EXPENSES = 'DELETE_EXPENSES';
+export const EDIT_EXPENSES = 'EDIT_EXPENSES';
+export const EDIT_SUCCESS = 'EDIT_SUCCESS';
 
 const actionEmail = (email: string) => ({
   type: USER_EMAIL,
@@ -37,7 +39,7 @@ export function fetchCurrencies() {
   };
 }
 
-const requestSuccessExpenses = (values: Despesas, data: any) => ({
+export const requestSuccessExpenses = (values: Despesas, data: any) => ({
   type: REQUEST_SUCCESS_EXPENSES,
   payload: {
     values,
@@ -61,6 +63,23 @@ export function fetchExpenses(values: Despesas) {
 export const deleteExpenses = (id: any) => ({
   type: DELETE_EXPENSES,
   payload: id,
+});
+
+export const editExpenses = (id: any, edit: boolean) => ({
+  type: EDIT_EXPENSES,
+  payload: {
+    id,
+    edit,
+  },
+});
+
+export const editSuccess = (values: Despesas, data: any, expenses: any) => ({
+  type: EDIT_SUCCESS,
+  payload: {
+    values,
+    data,
+    expenses,
+  },
 });
 
 export default actionEmail;

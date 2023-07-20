@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Dispatch, RootState } from '../types';
-import { fetchCurrencies, fetchExpenses } from '../redux/actions';
+import { Dispatch, RootState, WalletState } from '../types';
+import { editSuccess, fetchCurrencies, fetchExpenses } from '../redux/actions';
 
 function WalletForm() {
   const dispatch: Dispatch = useDispatch();
@@ -23,6 +23,7 @@ function WalletForm() {
 
   const stateCurrencies = useSelector((state: RootState) => state.wallet.currencies);
   const stateFiltro = stateCurrencies.filter((currencies) => currencies !== 'USDT');
+  const stateWallet = useSelector((state: RootState) => state.wallet);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -36,6 +37,15 @@ function WalletForm() {
     const valores = { ...values, id: soma };
     dispatch(fetchExpenses(valores));
     setSoma(soma + 1);
+    setValues({ ...values, value: '', description: '' });
+  };
+
+  const handleClickEdit = () => {
+    const valores = { ...values, id: stateWallet.idToEdit };
+    const newExpenses = stateWallet.expenses
+      .filter((obj: WalletState, index) => index !== stateWallet.idToEdit);
+    const data = stateWallet.expenses[valores.id];
+    dispatch(editSuccess(valores, data, newExpenses));
     setValues({ ...values, value: '', description: '' });
   };
 
@@ -81,7 +91,9 @@ function WalletForm() {
         <option>Transporte</option>
         <option>Saúde</option>
       </select>
-      <button type="button" onClick={ handleClick }>Adicionar despesa</button>
+      { stateWallet.editor
+        ? <button type="button" onClick={ handleClickEdit }>Editar despesa</button>
+        : <button type="button" onClick={ handleClick }>Adicionar despesa</button> }
     </div>
   );
 }

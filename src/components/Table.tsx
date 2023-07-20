@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, WalletState } from '../types';
-import { deleteExpenses } from '../redux/actions';
+import { deleteExpenses, editExpenses } from '../redux/actions';
 
 function Table() {
   const dispatch = useDispatch();
@@ -45,6 +45,12 @@ function Table() {
                 onClick={ () => handleClick(objeto.id) }
               >
                 Excluir
+              </button>
+              <button
+                data-testid="edit-btn"
+                onClick={ () => dispatch(editExpenses(objeto.id, true)) }
+              >
+                Editar
               </button>
             </td>
           </tr>
